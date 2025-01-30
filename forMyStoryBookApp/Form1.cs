@@ -7,7 +7,7 @@ namespace forMyStoryBookApp
 
         List<PersonModel> people = new List<PersonModel>();
 
-       
+
 
         private Dictionary<Control, Rectangle> controls = new Dictionary<Control, Rectangle>();
         private Size originalSize;
@@ -20,8 +20,9 @@ namespace forMyStoryBookApp
             LoadPeopleList();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object? sender, EventArgs e)
         {
+#nullable disable
             originalSize = this.ClientSize;
 
             // Tüm bileþenlerin baþlangýç konumunu ve boyutunu kaydet
@@ -62,16 +63,25 @@ namespace forMyStoryBookApp
             people = SqlliteDataAccess.LoadPeople();
             //WireUpPeopleList(); 
         }
-        
+        private void WireUpPeopleList()
+        {
+            listBoxNames.DataSource = null;
+            listBoxNames.DataSource = people;
+            listBoxNames.DisplayMember = "FullName";
+        }
 
+        private void listBoxNames_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
 
+        private void labelSP_Click(object sender, EventArgs e)
+        {
 
-
-
+        }
     }
 
-    
+
 
     public class PersonModel
     {

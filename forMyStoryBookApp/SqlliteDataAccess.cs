@@ -16,7 +16,7 @@ namespace forMyStoryBookApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query < PersonModel > ("select from person", new DynamicParameters());
+                var output = cnn.Query < PersonModel > ("select * from person", new DynamicParameters());
                 return output.ToList();
             }
 
@@ -26,7 +26,7 @@ namespace forMyStoryBookApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into person (ID, Name, Age, AverageLife, HP, MP, SP,SkillPoints, Strength, Intelligence, Agility, Durability, Intuition, Class ) values (@ID, @Name, @Age, @AverageLife, @HP, @MP, @SP, @SkillPoints, @Strength, @Intelligence, @Agility, @Durability, @Intuition, @Class ) ", person);
+                cnn.Execute("insert into person (ID, Name, Age, AverageLife, HP, MP, SP,SkillPoints, Strength, Intelligence, Agility, Durability, Intuition, Class, Title ) values (@ID, @Name, @Age, @AverageLife, @HP, @MP, @SP, @SkillPoints, @Strength, @Intelligence, @Agility, @Durability, @Intuition, @Class, @Title ) ", person);
             }
         }
 

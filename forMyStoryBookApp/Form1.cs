@@ -4,6 +4,26 @@ namespace forMyStoryBookApp
 {
     public partial class Form1 : Form
     {
+        public int ID = 0;
+        public int level = 0;
+        public String name;
+        public int age = 0;
+        public int averageLife = 60;
+        public int HP = 0;
+        public int MP = 0;
+        public int SP = 0;
+        public int skillPoints = 0;
+        public int Strength = 0;
+        public int Intelligence = 0;
+        public int Agility = 0;
+        public int Vigor = 0;
+        public int Durability = 0;
+        public String Intuition;
+        public String Class;
+        public String Title;
+        public static Boolean checkingP = false;
+
+
 
         List<PersonModel> people = new List<PersonModel>();
 
@@ -61,7 +81,7 @@ namespace forMyStoryBookApp
         private void LoadPeopleList()
         {
             people = SqlliteDataAccess.LoadPeople();
-            //WireUpPeopleList(); 
+            WireUpPeopleList();
         }
         private void WireUpPeopleList()
         {
@@ -79,9 +99,79 @@ namespace forMyStoryBookApp
         {
 
         }
+
+        private void buttonCheckNormal_Click(object sender, EventArgs e)
+        {
+            int age, level, strength, intelligence, agility, vigor, durability, id;
+            if (!int.TryParse(textBoxAge.Text.Trim(), out age) ||
+                !int.TryParse(textBoxLevel.Text.Trim(), out level) ||
+                !int.TryParse(textBoxStrength.Text.Trim(), out strength) ||
+                !int.TryParse(textBoxIntelligence.Text.Trim(), out intelligence) ||
+                !int.TryParse(textBoxAgility.Text.Trim(), out agility) ||
+                !int.TryParse(textBoxVigor.Text.Trim(), out vigor) ||
+                !int.TryParse(textBoxDurability.Text.Trim(), out durability) ||
+                !int.TryParse(textBoxID.Text.Trim(), out id))
+            {
+                MessageBox.Show("Please fill all the requiremented places!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // SkillPoints hesapla
+            skillPoints = (age * 3 + level * 3 - strength - intelligence - agility - vigor - durability);
+            textBoxSkillPoints.Text = skillPoints.ToString();
+
+            if (skillPoints < 0)
+            {
+                MessageBox.Show("Skill points cannot be negative number", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                // Deðerleri güncelle
+                this.age = age;
+                this.Strength = strength;
+                this.Intelligence = intelligence;
+                this.Agility = agility;
+                this.Vigor = vigor;
+                this.Durability = durability;
+                this.level = level;
+                this.ID = id;
+                this.name = textBoxName.Text;
+                checkingP = true;
+            }
+        }
+
+        private void buttonApplyNormal_Click(object sender, EventArgs e)
+        {
+            if (checkingP)
+            {
+                labelID.Text = ID.ToString();
+                labelName.Text = name;
+                labelAge.Text = age.ToString();
+                labelLevel.Text = level.ToString();
+                labelSkillPoints.Text = skillPoints.ToString();
+                labelStrength.Text = Strength.ToString();
+                labelIntelligence.Text = Intelligence.ToString();
+                labelAgility.Text = Agility.ToString();
+                labelVigor.Text = Vigor.ToString();
+                labelDurability.Text = Durability.ToString();
+                checkingP=false;
+
+            }
+
+            else 
+            {
+                MessageBox.Show("Please check before apply!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
+
+
+
+
+
+
+
+        }
     }
-
-
 
     public class PersonModel
     {

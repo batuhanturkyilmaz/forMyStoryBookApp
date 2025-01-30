@@ -655,6 +655,7 @@
             buttonCheckNormal.TabIndex = 58;
             buttonCheckNormal.Text = "Check";
             buttonCheckNormal.UseVisualStyleBackColor = true;
+            buttonCheckNormal.Click += buttonCheckNormal_Click;
             // 
             // buttonApplyNormal
             // 
@@ -666,6 +667,7 @@
             buttonApplyNormal.TabIndex = 59;
             buttonApplyNormal.Text = "Apply";
             buttonApplyNormal.UseVisualStyleBackColor = true;
+            buttonApplyNormal.Click += buttonApplyNormal_Click;
             // 
             // buttonAdd
             // 

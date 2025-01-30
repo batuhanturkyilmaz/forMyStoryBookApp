@@ -144,6 +144,37 @@ namespace forMyStoryBookApp
         {
             if (checkingP)
             {
+                int[] multipliers = { 50, 100, 200, 400, 800, 1600, 3200 }; // I divided levels by hundreds. Each hundred has its very own hp rising.
+                int hundreds = Vigor / 100;//I'm taking hundreds as a integer vigor/100, so it will give me exact number that which hundred I'm working
+                int remainder = Vigor % 100;//and that is remainder that I need to calculate afterwards. This makes code simple, little complexs. 
+
+                for (int i = 0; i < hundreds && i < multipliers.Length; i++) //even though I haven't wrote any comment thing, I'ma add from this point on, of course there is not specific queue I'm going to make
+                {//It is a loop allows that each hundred takes its own hp value.
+                    HP += multipliers[i] * 100;
+                }
+
+                if (hundreds < multipliers.Length)//and this is for remainder, which we don't calculate while calculating hundreds.
+                {
+                    HP += remainder * multipliers[hundreds];
+                }
+                //now I'mma do same thing for MP and SP
+
+
+                int[] multipliersMP = { 100, 200, 400, 800, 1600, 3200, 6400 }; // I divided levels by hundreds. Each hundred has its very own MP rising.
+                int hundredsMP = Intelligence / 100;//I'm taking hundreds as a integer Intelligence/100, so it will give me exact number that which hundred I'm working
+                int remainderMP = Intelligence % 100;//and that is remainder that I need to calculate afterwards. This makes code simple, little complexs. 
+
+                for (int i = 0; i < hundredsMP && i < multipliersMP.Length; i++) 
+                {//It is a loop allows that each hundred takes its own mp value.
+                    MP += multipliersMP[i] * 100;
+                }
+
+                if (hundredsMP < multipliersMP.Length)//and this is for remainder, which we don't calculate while calculating hundreds.
+                {
+                    MP += remainderMP * multipliersMP[hundredsMP];
+                }
+
+
                 labelID.Text = ID.ToString();
                 labelName.Text = name;
                 labelAge.Text = age.ToString();

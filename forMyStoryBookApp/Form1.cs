@@ -111,6 +111,8 @@ namespace forMyStoryBookApp
                 !int.TryParse(textBoxVigor.Text.Trim(), out vigor) ||
                 !int.TryParse(textBoxDurability.Text.Trim(), out durability) ||
                 !int.TryParse(textBoxID.Text.Trim(), out id))
+
+
             {
                 MessageBox.Show("Please fill all the requiremented places!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -137,13 +139,36 @@ namespace forMyStoryBookApp
                 this.ID = id;
                 this.name = textBoxName.Text;
                 checkingP = true;
+                this.Title=comboBoxTitle.Text;
             }
         }
 
         private void buttonApplyNormal_Click(object sender, EventArgs e)
         {
-            if (checkingP)
+            if (checkingP) //this controls if we checked. If there is no problem, then it'll work
             {
+               
+
+
+
+
+                int[] multipliersDurability = { 15, 30, 100, 150, 300, 450, 500 };//this is the same thing as HP, multipliers. Adding HP some amount, not as much as vigor, yet it is fair enough.
+                int hundredsDurability = Durability / 100;
+                int remainderDurability = Durability % 100;
+
+                for (int i = 0; i<hundredsDurability && i < multipliersDurability.Length;i++)
+                {
+                    HP += multipliersDurability[i] * 100;
+                }
+                if (hundredsDurability < multipliersDurability.Length)
+                {
+                    HP += remainderDurability * multipliersDurability[hundredsDurability];
+                }
+                
+
+
+
+
                 int[] multipliers = { 50, 100, 200, 400, 800, 1600, 3200 }; // I divided levels by hundreds. Each hundred has its very own hp rising.
                 int hundreds = Vigor / 100;//I'm taking hundreds as a integer vigor/100, so it will give me exact number that which hundred I'm working
                 int remainder = Vigor % 100;//and that is remainder that I need to calculate afterwards. This makes code simple, little complexs. 
@@ -158,6 +183,10 @@ namespace forMyStoryBookApp
                     HP += remainder * multipliers[hundreds];
                 }
                 //now I'mma do same thing for MP and SP
+
+
+
+
 
 
                 int[] multipliersMP = { 100, 200, 400, 800, 1600, 3200, 6400 }; // I divided levels by hundreds. Each hundred has its very own MP rising.
@@ -175,6 +204,26 @@ namespace forMyStoryBookApp
                 }
 
 
+
+
+
+
+                int[] multipliersSP = { 1, 2, 3, 4, 5, 6, 7 };
+                int hundredsSP = SP / 100;
+                int remainderSP = SP % 100;
+
+                for (int i = 0; i < hundredsSP && i < multipliersSP.Length; i++)
+                {//It is a loop allows that each hundred takes its own sp value.
+                    SP += multipliersSP[i] * 100;
+                }
+
+                if (hundredsMP < multipliersMP.Length)//and this is for remainder, which we don't calculate while calculating hundreds.
+                {
+                    SP += remainderSP * multipliersSP[hundredsSP];
+                }
+
+
+
                 labelID.Text = ID.ToString();
                 labelName.Text = name;
                 labelAge.Text = age.ToString();
@@ -186,6 +235,10 @@ namespace forMyStoryBookApp
                 labelVigor.Text = Vigor.ToString();
                 labelDurability.Text = Durability.ToString();
                 checkingP=false;
+                labelTitle.Text = Title ;
+                labelHP.Text = HP.ToString();
+                labelMP.Text = MP.ToString();
+                labelSP.Text = SP.ToString();
 
             }
 

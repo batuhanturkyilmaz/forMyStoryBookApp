@@ -10,7 +10,7 @@ using Dapper;
 
 namespace forMyStoryBookApp
 {
-    public class SqlliteDataAccess
+    public class SqlliteDataAccess //class r
     {
         public static List<PersonModel> LoadPeople()
         {

@@ -267,6 +267,7 @@
             // comboBoxTitle
             // 
             comboBoxTitle.FormattingEnabled = true;
+            comboBoxTitle.Items.AddRange(new object[] { "Outcast", "Peasant", "Citizen", "Noble", "Fighter", "Warrior", "Archer", "Mage", "Bandit", "Assassin", "Ki Master", "Knight", "SharpShooter", "Great Mage", "Rogue Lord", "Master Assassin", "Legendary Fighter", "Elite Knight", "Archer GrandMaster", "War Mage", "Rogue Emperor", "Shadow Assassin", "Deathbringer" });
             comboBoxTitle.Location = new Point(168, 287);
             comboBoxTitle.Name = "comboBoxTitle";
             comboBoxTitle.Size = new Size(121, 23);

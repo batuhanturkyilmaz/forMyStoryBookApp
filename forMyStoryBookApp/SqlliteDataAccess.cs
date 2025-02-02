@@ -26,7 +26,7 @@ namespace forMyStoryBookApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into person (ID, Name, Age, AverageLife, HP, MP, SP,SkillPoints, Strength, Intelligence, Agility, Durability, Intuition, Class, Title ) values (@ID, @Name, @Age, @AverageLife, @HP, @MP, @SP, @SkillPoints, @Strength, @Intelligence, @Agility, @Durability, @Intuition, @Class, @Title ) ", person);
+                cnn.Execute("insert into person (ID, Name, Age, AverageLife, HP, MP, SP,SkillPoints, Strength, Intelligence, Agility, Durability, Intuition, Class, Title, Level ) values (@ID, @Name, @Age, @AverageLife, @HP, @MP, @SP, @SkillPoints, @Strength, @Intelligence, @Agility, @Durability, @Intuition, @Class, @Title, @Level ) ", person);
             }
         }
 

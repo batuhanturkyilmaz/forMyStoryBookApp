@@ -90,7 +90,8 @@
             buttonCheckNormal = new Button();
             buttonApplyNormal = new Button();
             buttonAdd = new Button();
-            buttonRemove = new Button();
+            buttonRefresh = new Button();
+            buttonClear = new Button();
             SuspendLayout();
             // 
             // label1
@@ -680,17 +681,31 @@
             buttonAdd.TabIndex = 60;
             buttonAdd.Text = "Add";
             buttonAdd.UseVisualStyleBackColor = true;
+            buttonAdd.Click += buttonAdd_Click;
             // 
-            // buttonRemove
+            // buttonRefresh
             // 
-            buttonRemove.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            buttonRemove.ForeColor = SystemColors.ActiveCaptionText;
-            buttonRemove.Location = new Point(921, 432);
-            buttonRemove.Name = "buttonRemove";
-            buttonRemove.Size = new Size(75, 23);
-            buttonRemove.TabIndex = 61;
-            buttonRemove.Text = "Remove";
-            buttonRemove.UseVisualStyleBackColor = true;
+            buttonRefresh.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            buttonRefresh.ForeColor = SystemColors.ActiveCaptionText;
+            buttonRefresh.Location = new Point(921, 432);
+            buttonRefresh.Name = "buttonRefresh";
+            buttonRefresh.Size = new Size(75, 23);
+            buttonRefresh.TabIndex = 61;
+            buttonRefresh.Text = "Refresh";
+            buttonRefresh.UseVisualStyleBackColor = true;
+            buttonRefresh.Click += buttonRefresh_Click;
+            // 
+            // buttonClear
+            // 
+            buttonClear.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            buttonClear.ForeColor = SystemColors.ActiveCaptionText;
+            buttonClear.Location = new Point(324, 93);
+            buttonClear.Name = "buttonClear";
+            buttonClear.Size = new Size(75, 23);
+            buttonClear.TabIndex = 62;
+            buttonClear.Text = "Clear";
+            buttonClear.UseVisualStyleBackColor = true;
+            buttonClear.Click += button1_Click;
             // 
             // Form1
             // 
@@ -699,7 +714,8 @@
             AutoSize = true;
             BackColor = Color.Black;
             ClientSize = new Size(1094, 681);
-            Controls.Add(buttonRemove);
+            Controls.Add(buttonClear);
+            Controls.Add(buttonRefresh);
             Controls.Add(buttonAdd);
             Controls.Add(buttonApplyNormal);
             Controls.Add(buttonCheckNormal);
@@ -834,6 +850,7 @@
         private Button buttonCheckNormal;
         private Button buttonApplyNormal;
         private Button buttonAdd;
-        private Button buttonRemove;
+        private Button buttonRefresh;
+        private Button buttonClear;
     }
 }

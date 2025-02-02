@@ -12,6 +12,46 @@ namespace forMyStoryBookApp
 {
     public class SqlliteDataAccess //class r
     {
+        public static PersonModel LoadPersonByName(string Name)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+
+                string query = "SELECT * FROM person WHERE Name = @Name";
+
+                // Veritabanından gelen sonucu al
+                var result = cnn.QueryFirstOrDefault<PersonModel>(query, new { Name = Name });
+
+                // Eğer sonuç null ise, uygun bir işlem yapabilirsiniz
+                if (result == null)
+                {
+                    // İsterseniz null döndürebilirsiniz ya da varsayılan bir değer döndürebilirsiniz
+                    return null; // ya da return new PersonModel(); şeklinde varsayılan bir nesne dönebilirsiniz
+                }
+
+                return result;  // Eğer kayıt bulunduysa, sonucu döndürüyoruz
+            }
+        }
+
+        public static void DeletePersonByName(string name)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                string query = "DELETE FROM person WHERE Name = @Name"; // İsimle eşleşen kaydı siler
+                cnn.Execute(query, new { Name = name });
+            }
+        }
+
+        public static List<PersonModel> LoadAllPersons()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                string query = "SELECT * FROM person"; // Tüm verileri seç
+                return cnn.Query<PersonModel>(query).ToList(); // Verileri bir listeye döndür
+            }
+        }
+
+
         public static List<PersonModel> LoadPeople()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -34,6 +74,8 @@ namespace forMyStoryBookApp
         {
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
         }
+
+
 
     }
 }

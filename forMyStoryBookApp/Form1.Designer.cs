@@ -92,6 +92,8 @@
             buttonAdd = new Button();
             buttonRefresh = new Button();
             buttonClear = new Button();
+            buttonTakeFromDataBase = new Button();
+            buttonRemoveFromDatabase = new Button();
             SuspendLayout();
             // 
             // label1
@@ -707,6 +709,30 @@
             buttonClear.UseVisualStyleBackColor = true;
             buttonClear.Click += button1_Click;
             // 
+            // buttonTakeFromDataBase
+            // 
+            buttonTakeFromDataBase.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            buttonTakeFromDataBase.ForeColor = SystemColors.ActiveCaptionText;
+            buttonTakeFromDataBase.Location = new Point(840, 461);
+            buttonTakeFromDataBase.Name = "buttonTakeFromDataBase";
+            buttonTakeFromDataBase.Size = new Size(156, 23);
+            buttonTakeFromDataBase.TabIndex = 63;
+            buttonTakeFromDataBase.Text = "Take it from database";
+            buttonTakeFromDataBase.UseVisualStyleBackColor = true;
+            buttonTakeFromDataBase.Click += buttonTakeFromDataBase_Click;
+            // 
+            // buttonRemoveFromDatabase
+            // 
+            buttonRemoveFromDatabase.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            buttonRemoveFromDatabase.ForeColor = SystemColors.ActiveCaptionText;
+            buttonRemoveFromDatabase.Location = new Point(840, 490);
+            buttonRemoveFromDatabase.Name = "buttonRemoveFromDatabase";
+            buttonRemoveFromDatabase.Size = new Size(156, 23);
+            buttonRemoveFromDatabase.TabIndex = 64;
+            buttonRemoveFromDatabase.Text = "Remove from database";
+            buttonRemoveFromDatabase.UseVisualStyleBackColor = true;
+            buttonRemoveFromDatabase.Click += buttonRemoveFromDatabase_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -714,6 +740,8 @@
             AutoSize = true;
             BackColor = Color.Black;
             ClientSize = new Size(1094, 681);
+            Controls.Add(buttonRemoveFromDatabase);
+            Controls.Add(buttonTakeFromDataBase);
             Controls.Add(buttonClear);
             Controls.Add(buttonRefresh);
             Controls.Add(buttonAdd);
@@ -852,5 +880,7 @@
         private Button buttonAdd;
         private Button buttonRefresh;
         private Button buttonClear;
+        private Button buttonTakeFromDataBase;
+        private Button buttonRemoveFromDatabase;
     }
 }

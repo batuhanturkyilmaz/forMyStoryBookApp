@@ -1,3 +1,4 @@
+using System.Data;
 using System.Data.SQLite;
 
 namespace forMyStoryBookApp
@@ -89,6 +90,8 @@ namespace forMyStoryBookApp
             listBoxNames.DataSource = people;
             listBoxNames.DisplayMember = "Name";
         }
+
+
 
         private void listBoxNames_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -430,17 +433,10 @@ namespace forMyStoryBookApp
                 Title = this.Title
             };
 
-            // Yeni kiþiyi kaydet
+            // New person adding
             SqlliteDataAccess.SavePerson(newPerson);
 
-            // Kayýtlý tüm kiþileri listele
-            List<PersonModel> people = SqlliteDataAccess.LoadPeople();
-            foreach (var person in people)
-            {
-                Console.WriteLine($"ID: {person.ID}, Name: {person.Name}, Class: {person.Class}");
-            }
-
-
+           
 
 
         }
@@ -472,6 +468,68 @@ namespace forMyStoryBookApp
         {
             LoadPeopleList();
         }
+
+        private void buttonTakeFromDataBase_Click(object sender, EventArgs e)
+        {
+            if (listBoxNames.SelectedItem == null)
+                return;
+
+
+            string selectedName = listBoxNames.SelectedItem.ToString().Trim();
+            MessageBox.Show($"Selected Name: {selectedName}");
+
+            PersonModel selectedPerson = SqlliteDataAccess.LoadPersonByName(selectedName);
+
+
+            if (selectedPerson != null)
+            {
+                // Bilgileri arayüzde göster
+                labelID.Text = selectedPerson.ID.ToString();
+                labelLevel.Text = selectedPerson.Level.ToString();
+                labelName.Text = selectedPerson.Name;
+                labelAge.Text = selectedPerson.Age.ToString();
+                labelAverageLife.Text = selectedPerson.AverageLife.ToString();
+                labelHP.Text = selectedPerson.HP.ToString();
+                labelMP.Text = selectedPerson.MP.ToString();
+                labelSP.Text = selectedPerson.SP.ToString();
+                labelSkillPoints.Text = selectedPerson.SkillPoints.ToString();
+                labelStrength.Text = selectedPerson.Strength.ToString();
+                labelIntelligence.Text = selectedPerson.Intelligence.ToString();
+                labelAgility.Text = selectedPerson.Agility.ToString();
+                labelVigor.Text = selectedPerson.Vigor.ToString();
+                labelDurability.Text = selectedPerson.Durability.ToString();
+                labelIntuition.Text = selectedPerson.Intuition.ToString();
+                labelClass.Text = selectedPerson.Class;
+                labelTitle.Text = selectedPerson.Title;
+            }
+            else
+            {
+                MessageBox.Show("There is no person");
+            }
+        }
+
+        private void buttonRemoveFromDatabase_Click(object sender, EventArgs e)
+        {
+            if (listBoxNames.SelectedItem == null)
+                return;
+
+            string selectedName = listBoxNames.SelectedItem.ToString().Trim();
+
+            // Veritabanýndan seçilen kiþiyi sil
+            SqlliteDataAccess.DeletePersonByName(selectedName);
+
+            // listBoxNames'ýn DataSource'nu kaldýrýn
+            listBoxNames.DataSource = null;
+
+            // Veritabanýndan tüm kiþileri yeniden yükle
+            var updatedList = SqlliteDataAccess.LoadAllPersons(); // Veritabanýndaki tüm kiþileri yükleyin
+
+            // listBoxNames'e yeniden veri ekleyin
+            listBoxNames.DataSource = updatedList;
+            listBoxNames.DisplayMember = "Name"; // Görüntülemek istediðiniz alaný belirtin
+
+            MessageBox.Show($"{selectedName} veritabanýndan silindi.");
+        }
     }
 
     public class PersonModel
@@ -500,6 +558,13 @@ namespace forMyStoryBookApp
         public String Class { get; set; }
 
         public String Title { get; set; }
+
+
+        public override string ToString()
+        {
+            return Name; // PersonModel nesnesinin adýný döndürüyoruz
+        }
+
 
     }
 }

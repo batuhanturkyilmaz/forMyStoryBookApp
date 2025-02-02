@@ -8,7 +8,7 @@ namespace forMyStoryBookApp
         public int level = 0;
         public String name;
         public int age = 0;
-        public int averageLife = 60;
+        public double averageLife = 60;
         public int HP = 0;
         public int MP = 0;
         public int SP = 0;
@@ -147,7 +147,69 @@ namespace forMyStoryBookApp
         {
             if (checkingP) //this controls if we checked. If there is no problem, then it'll work
             {
-               
+                switch (Title)
+                {
+
+
+
+                    case "Noble": Intelligence += 15; Agility += 3;Durability += 5; Vigor += 30; break;
+
+                    case "Citizen": Intelligence += 10; Agility += 7; Durability += 3; Vigor += 20; break;
+
+                    case "Outcast": Intelligence += 10; Agility += 7; Durability += 3; Vigor += 10; break;
+
+                    case "Peasant": Strength += 10; Agility += 3; Durability += 8; Vigor += 15; break;
+
+
+
+                    case "Fighter": Strength += 15; Durability += 5; Vigor += 10; break;
+
+                    case "Warrior": Strength += 20; Durability += 10; Vigor += 12; break;
+
+                    case "Archer": Agility += 20; Durability += 10; Vigor += 12; break;
+
+                    case "Mage": Intelligence += 20; Durability += 8; Vigor += 10; break;
+
+                    case "Bandit": Agility += 15; Vigor += 10; Durability += 5; break;
+
+                    case "Assassin": Agility += 20; Vigor += 5; Durability += 5; break;
+
+
+
+                    case "Ki Master": Strength += 45; Vigor += 30; Durability += 50 ; break;
+
+                    case "Knight": Strength += 50; Vigor += 40; Durability += 45; break;
+
+                    case "Sharpshooter": Agility += 50; Vigor += 30; Durability += 25; break;
+
+                    case "Great Mage": Intelligence += 80; Vigor += 60; Durability += 10; break;
+
+                    case "Rogue Lord": Strength += 30; Agility += 50; Vigor += 35; Durability += 20; break;
+
+                    case "Master Assassin": Strength += 25; Agility += 65; Vigor += 50; Durability += 15; break;
+
+
+
+                    case "Legendary Fighter": Strength += 100; Vigor += 80; Durability += 90; break;
+
+                    case "Elite Knight": Strength += 110; Vigor += 70; Durability += 100; Agility += 30 ; break;
+
+                    case "Archer GrandMaster": Agility += 100; Vigor += 50; Durability += 40; Strength += 20; Intelligence += 40; break;
+
+                    case "War Mage": Agility += 100; Vigor += 100; Durability += 60; Strength += 100; Intelligence += 150; break;
+
+                    case "Rogue Emperor": Agility += 120; Vigor += 80; Durability += 50; Strength += 100; break;
+
+                    case "Shadow Assassin": Strength += 110; Agility += 150; Vigor += 70; Intelligence += 60; Durability +=50 ; break;
+
+
+
+                    case "Deathbringer": Agility += 100; Vigor += 150; Durability += 100; Strength += 150; Intelligence += 500; break;
+
+
+
+
+                }
 
 
 
@@ -209,8 +271,8 @@ namespace forMyStoryBookApp
 
 
                 int[] multipliersSP = { 1, 2, 3, 4, 5, 6, 7 };
-                int hundredsSP = SP / 100;
-                int remainderSP = SP % 100;
+                int hundredsSP = Agility / 100;
+                int remainderSP = Agility % 100;
 
                 for (int i = 0; i < hundredsSP && i < multipliersSP.Length; i++)
                 {//It is a loop allows that each hundred takes its own sp value.
@@ -219,8 +281,49 @@ namespace forMyStoryBookApp
 
                 if (hundredsMP < multipliersMP.Length)//and this is for remainder, which we don't calculate while calculating hundreds.
                 {
-                    SP += remainderSP * multipliersSP[hundredsSP];
+                    SP += remainderSP * multipliersSP[hundredsSP]; // I got bored while I'm adding comment lines, it's going to be held for a while.
                 }
+
+
+
+
+                averageLife += Vigor*0.5 + Durability*0.25 ;
+                double ClassOp;
+                ClassOp = (Strength  + Durability  + Intelligence  + Agility  + Vigor) / 5;
+                switch (ClassOp)
+                {
+                    case double n when (n >= 0 && n <= 100):
+                        Class = "F";
+                        break;
+                    case double n when (n > 100 && n <= 200):
+                        Class = "E";
+                        break;
+                    case double n when (n > 200 && n <= 300):
+                        Class = "D";
+                        break;
+                    case double n when (n > 300 && n <= 400):
+                        Class = "C";
+                        break;
+                    case double n when (n > 400 && n <= 500):
+                        Class = "B";
+                        break;
+                    case double n when (n > 500 && n <= 600):
+                        Class = "A";
+                        break;
+                    case double n when (n > 600 && n <= 700):
+                        Class = "S";
+                        break;
+                    default: Class = "F"; break;
+
+                }
+                
+
+
+
+
+
+
+
 
 
 
@@ -234,12 +337,68 @@ namespace forMyStoryBookApp
                 labelAgility.Text = Agility.ToString();
                 labelVigor.Text = Vigor.ToString();
                 labelDurability.Text = Durability.ToString();
-                checkingP=false;
                 labelTitle.Text = Title ;
                 labelHP.Text = HP.ToString();
                 labelMP.Text = MP.ToString();
                 labelSP.Text = SP.ToString();
+                labelClass.Text = Class;
+                labelIntuition.Text = Intuition;
+                labelAverageLife.Text= averageLife.ToString();
 
+
+
+
+
+
+
+
+
+                textBoxList.Text = 
+                    "######################" + Environment.NewLine +
+                    "ID: " + labelID.Text + Environment.NewLine +
+                    "Level: " + labelLevel.Text + Environment.NewLine +
+                    "Name: "  + labelName.Text + Environment.NewLine +
+                    "Age: " + labelAge.Text + Environment.NewLine +
+                    "Average Life: " + labelAverageLife.Text + Environment.NewLine +
+                    "HP: " +labelHP.Text + Environment.NewLine +
+                    "MP: " +labelMP.Text +Environment.NewLine +
+                    "SP: " +labelSP.Text + Environment.NewLine +
+                    "Skill Points: " + labelSkillPoints.Text + Environment.NewLine +
+                    "Strength: " + labelStrength.Text + Environment.NewLine +
+                    "Intelligence: " + labelIntelligence.Text + Environment.NewLine +
+                    "Agility: " + labelAgility.Text +Environment.NewLine +
+                    "Vigor: " + labelVigor.Text + Environment.NewLine +
+                    "Durability: " + labelDurability.Text + Environment.NewLine +
+                    "Intuition: " + labelIntuition.Text +Environment.NewLine +
+                    "Class: " + labelClass.Text + Environment.NewLine +
+                    "######################";
+
+
+
+
+
+
+
+
+                ID = 0;
+                level = 0;
+                name = "";
+                age = 0;
+                averageLife = 60;
+                HP= 0;
+                MP= 0;
+                SP= 0;
+                skillPoints = 0;
+                Strength = 0;
+                Intelligence = 0;
+                Agility = 0;
+                Vigor = 0;
+                Durability = 0;
+                Intuition = "";
+                Class = "";
+                Title = "";
+
+                checkingP = false;
             }
 
             else 
@@ -261,7 +420,7 @@ namespace forMyStoryBookApp
     {
         public int ID { get; set; }
         public int level { get; set; }
-        public string name { get; set; }
+        public String name { get; set; }
         public int age { get; set; }
         public int averageLife { get; set; }
         public int HP { get; set; }
@@ -271,14 +430,16 @@ namespace forMyStoryBookApp
         public int Strength { get; set; }
 
         public int Intelligence { get; set; }
+
         public int Agility { get; set; }
 
         public int Vigor { get; set; }
+
         public int Durability { get; set; }
 
-        public int Intuition { get; set; }
+        public String Intuition { get; set; }
 
-        public int cClass { get; set; }
+        public String Class { get; set; }
 
     }
 }
